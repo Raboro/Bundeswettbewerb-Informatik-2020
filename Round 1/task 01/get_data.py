@@ -4,7 +4,7 @@ class GetData():
 
     @staticmethod
     def get_and_return_data():
-        with open("parkplatz0.txt", "r") as file:
+        with open("files/parkplatz0.txt", "r") as file:
             data = file.read().split("\n")
         
         data.pop(-1)
