@@ -11,9 +11,9 @@ __status__ = "Production"
 
 def main() -> None:
     CARS_IN_SLOTS, CARS_IN_THE_WAY = GetData.get_and_return_data()
-    dm = DataManagment()
-    cars_need_moves = dm.select_cars_which_needs_moves(CARS_IN_SLOTS, CARS_IN_THE_WAY)
-    print(cars_need_moves)
+    data_managment = DataManagment(CARS_IN_SLOTS)
+    CARS_NEED_MOVES = data_managment.select_cars_which_needs_moves(CARS_IN_SLOTS, CARS_IN_THE_WAY)
+    result = data_managment.assign_moves_to_cars(CARS_IN_SLOTS, CARS_IN_THE_WAY, CARS_NEED_MOVES)
 
 
 if __name__ == "__main__":
