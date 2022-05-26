@@ -10,7 +10,7 @@ class GetData():
             e.g: A: [1, 2] => car A is in front of parkslot 2 and 3 (because counting starts at 0)
         """
 
-        with open("files/parkplatz1.txt", "r") as file:
+        with open("files/parkplatz0.txt", "r") as file:
             data = file.read().split("\n")
 
         data.pop(-1)
