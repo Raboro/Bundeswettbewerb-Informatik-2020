@@ -1,6 +1,6 @@
 class SolveSlidingParkingLot():
     
-    def __init__(self, CARS_IN_PARKSLOTS, BLOCKING_CARS) -> None:
+    def __init__(self, CARS_IN_PARKSLOTS: list[str], BLOCKING_CARS: dict[str: [int, int]]) -> None:
         self.CARS_IN_PARKSLOTS = CARS_IN_PARKSLOTS
         self.BLOCKING_CARS = BLOCKING_CARS
         self.BLOCKING_CARS_POSITIONS = [position for positions in self.BLOCKING_CARS.values() for position in positions]
@@ -25,6 +25,7 @@ class SolveSlidingParkingLot():
             if car in self.CARS_NEED_MOVES:
                 self.car_position = [position for position, value in enumerate(self.CARS_IN_PARKSLOTS) if value == car][0]
                 
+                #  if only one move is needed, it contains the direction of the move ["left", "right"], else it´s "multiple"
                 move_status = self.check_if_car_needs_one_or_multiple_moves()
                 
                 if move_status == "multiple":
@@ -124,7 +125,7 @@ class SolveSlidingParkingLot():
             blocking_cars = [car for car, positions in self.BLOCKING_CARS.items() 
                                  for position in positions 
                                     if position >= range_of_blocking_cars_and_side[0] and position < self.car_position and car != directly_blocking_car]
-
+        
         else: 
             #  add car to blocking_cars if their positions in the range_of_blocking_cars_and_side[0] && on the right side from the current car and their not the directly_blocking_car 
             blocking_cars = [car for car, positions in self.BLOCKING_CARS.items() 
