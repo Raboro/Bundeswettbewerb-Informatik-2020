@@ -12,6 +12,7 @@ class DataManagment():
 
         self.result = []
         self.car_position = 0
+        self.parkslot_border = [len(self.CARS_IN_PARKSLOTS), 0]
         
 
     def assign_moves_to_cars(self) -> None:
@@ -44,12 +45,12 @@ class DataManagment():
         return if the selected car, needs multiple car moves to come out; if not return the direction the blocking car needs to be moved
         """
 
-        #  one slot right blocked && two slots right free && car_position + 2 in parkslot range(<len(PARKSLOT))
-        if self.car_position + 1 in self.BLOCKING_CARS_POSITIONS and self.car_position + 2 not in self.BLOCKING_CARS_POSITIONS and self.car_position + 2 < len(self.CARS_IN_PARKSLOTS):
+        #  one slot right blocked && two slots right free && two slots right inside parkslot border
+        if self.car_position + 1 in self.BLOCKING_CARS_POSITIONS and self.car_position + 2 not in self.BLOCKING_CARS_POSITIONS and self.car_position + 2 < self.parkslot_border[0]:
             return "right"
         
-        #  one slot left blocked && two slots left free && car_position - 2 in parkslot range (>= 0)
-        elif self.car_position - 1 in self.BLOCKING_CARS_POSITIONS and self.car_position - 2 not in self.BLOCKING_CARS_POSITIONS and self.car_position - 2 >= 0:
+        #  one slot left blocked && two slots left free && two slots left inside parkslot border
+        elif self.car_position - 1 in self.BLOCKING_CARS_POSITIONS and self.car_position - 2 not in self.BLOCKING_CARS_POSITIONS and self.car_position - 2 >= self.parkslot_border[1]:
             return "left"
         
         return "multiple"
@@ -93,12 +94,12 @@ class DataManagment():
 
         position_changer = 0
         while True:
-            #  car_position - position_changer is free space && in parkslot range (left)
-            if self.car_position - position_changer not in self.BLOCKING_CARS_POSITIONS and self.car_position - position_changer >= 0:
+            #  car_position - position_changer is free space && inside parkslot border (left)
+            if self.car_position - position_changer not in self.BLOCKING_CARS_POSITIONS and self.car_position - position_changer >= self.parkslot_border[1]:
                 moves_needed_per_side[0] -= 1
 
-            #  car_position + position_changer is free space && in parkslot range (right)
-            if self.car_position + position_changer not in self.BLOCKING_CARS_POSITIONS and self.car_position + position_changer < len(self.CARS_IN_PARKSLOTS):
+            #  car_position + position_changer is free space && inside parkslot border (right)
+            if self.car_position + position_changer not in self.BLOCKING_CARS_POSITIONS and self.car_position + position_changer < self.parkslot_border[0]:
                 moves_needed_per_side[1] -= 1
 
             #  if one side got enough space and is the fastest one
