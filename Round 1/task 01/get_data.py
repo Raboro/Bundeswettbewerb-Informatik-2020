@@ -3,10 +3,10 @@ from itertools import takewhile
 class GetData():
 
     @staticmethod
-    def get_and_return_data() -> list[str] and dict[str: list[int]]:
+    def get_data_from_file_return_necessary_data() -> list[str] and dict[str: list[int]]:
         """
-        create CARS_IN_SLOTS -> list of all cars in parkslots
-        create CARS_IN_THE_WAY -> dict of cars in the way of parkslots and their positions in a list 
+        create CARS_IN_PARKSLOTS -> list of all cars in parkslots
+        create BLOCKING_CARS -> dict of cars in the way of parkslots as keys and their positions in a list as their values
             e.g: A: [1, 2] => car A is in front of parkslot 2 and 3 (because counting starts at 0)
         """
 
@@ -15,10 +15,15 @@ class GetData():
 
         data.pop(-1)
 
-        ALP = list("ABCDEFGHIJKLMNOPQRSTUVWXYZ")
-        break_index = [index+1 for index, char in enumerate(ALP) if char == data[0][2]]
-        CARS_IN_SLOTS = [char for char in takewhile(lambda char: char != ALP[break_index[0]], ALP)]
+        alphabet = list("ABCDEFGHIJKLMNOPQRSTUVWXYZ")
+        last_car = data[0][2]
+        last_car_index = [index+1 for index, char in enumerate(alphabet) if char == last_car][0]
 
-        CARS_IN_THE_WAY = {cars[0]: [int(cars[1:]), int(cars[1:])+1] for cars in data[2:]}
+        #  add car to CARS_IN_PARKSLOTS as long it´s not the last car, if it´s the last car stop list comprehension 
+        CARS_IN_PARKSLOTS = [car for car in takewhile(lambda car: car != alphabet[last_car_index], alphabet)]
 
-        return CARS_IN_SLOTS, CARS_IN_THE_WAY
+        #  car: [position_1, position_2]
+        BLOCKING_CARS = {cars[0]: [int(cars[1:]), int(cars[1:])+1] 
+                            for cars in data[2:]}
+
+        return CARS_IN_PARKSLOTS, BLOCKING_CARS
