@@ -1,4 +1,4 @@
-class DataManagment():
+class SolveSlidingParkingLot():
     
     def __init__(self, CARS_IN_PARKSLOTS, BLOCKING_CARS) -> None:
         self.CARS_IN_PARKSLOTS = CARS_IN_PARKSLOTS
