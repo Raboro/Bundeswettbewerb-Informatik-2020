@@ -113,7 +113,7 @@ class SolveSlidingParkingLot():
     def get_multiple_cars_need_to_move(self, range_of_blocking_cars_and_side: list[int ,str]) -> str:
         """
         return the cars, which need to be moved
-        e.g ["O"] => cr O and the directly_blocking_car need to be moved
+        e.g ["O"] => car O and the directly_blocking_car need to be moved
         """
 
         directly_blocking_car = [car for car, positions in self.BLOCKING_CARS.items() 

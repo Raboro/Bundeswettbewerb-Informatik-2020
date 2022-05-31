@@ -3,14 +3,14 @@ from itertools import takewhile
 class GetData():
 
     @staticmethod
-    def get_data_from_file_return_necessary_data() -> list[str] and dict[str: list[int]]:
+    def get_data_from_file_return_necessary_data(file_path: str) -> list[str] and dict[str: list[int]]:
         """
         return CARS_IN_PARKSLOTS -> list of all cars in parkslots
         return BLOCKING_CARS -> dict of cars in the way of parkslots as keys and their positions in a list as their values
-            e.g: A: [1, 2] => car A is in front of parkslot 2 and 3 (because counting starts at 0)
+        e.g: A: [1, 2] => car A is in front of parkslot 2 and 3 (because counting starts at 0)
         """
 
-        with open("files/parkplatz0.txt", "r") as file:
+        with open(file_path, "r") as file:
             data = file.read().split("\n")
 
         data.pop(-1)
