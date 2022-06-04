@@ -8,7 +8,7 @@ class TestSolveSlidingParkingLot():
     def __init__(self) -> None:
         self.start_time = time.time()
 
-        self.test_counter = 10
+        self.test_counter = 30
         self.passed_tests = 0
         self.failed_tests = 0
         self.test_result = 0
@@ -16,7 +16,7 @@ class TestSolveSlidingParkingLot():
         self.start_tests()
         result = self.get_test_result()
         print(f"\033[97mResult: {result:.0%}\nTest passed: {self.passed_tests}\nTest failed {self.failed_tests}\033[97m")
-        print("\n--- %s seconds executing time---" % (time.time() - self.start_time))
+        print(f"\n--- {time.time() - self.start_time} seconds executing time ---")
 
 
     def start_tests(self) -> None:
@@ -33,6 +33,26 @@ class TestSolveSlidingParkingLot():
         self.solve_sliding_parking_lot_test_assign_moves_to_cars_one_car_gets_blocked_01()
         self.solve_sliding_parking_lot_test_assign_moves_to_cars_one_car_gets_blocked_02()
         self.solve_sliding_parking_lot_test_assign_moves_to_cars_one_car_gets_blocked_03()
+        self.solve_sliding_parking_lot_test_assign_moves_to_cars_one_car_gets_blocked_04()
+        self.solve_sliding_parking_lot_test_check_if_car_needs_one_or_multiple_moves_single_right_move_01()
+        self.solve_sliding_parking_lot_test_check_if_car_needs_one_or_multiple_moves_single_right_move_02()
+        self.solve_sliding_parking_lot_test_check_if_car_needs_one_or_multiple_moves_single_right_move_03()
+        self.solve_sliding_parking_lot_test_check_if_car_needs_one_or_multiple_moves_single_left_move_01()
+        self.solve_sliding_parking_lot_test_check_if_car_needs_one_or_multiple_moves_single_left_move_02()
+        self.solve_sliding_parking_lot_test_check_if_car_needs_one_or_multiple_moves_single_left_move_03()
+        self.solve_sliding_parking_lot_test_check_if_car_needs_one_or_multiple_moves_one_multiple_move_01()
+        self.solve_sliding_parking_lot_test_check_if_car_needs_one_or_multiple_moves_one_multiple_move_02()
+        self.solve_sliding_parking_lot_test_check_if_car_needs_one_or_multiple_moves_one_multiple_move_03()
+        self.solve_sliding_parking_lot_test_one_move_get_blocking_car_blocking_car()
+        self.solve_sliding_parking_lot_test_get_moves_needed_per_side_1_left_2_right()
+        self.solve_sliding_parking_lot_test_get_moves_needed_per_side_2_left_1_right()
+        self.solve_sliding_parking_lot_test_find_range_of_blocking_cars_and_side_left_01()
+        self.solve_sliding_parking_lot_test_find_range_of_blocking_cars_and_side_left_02()
+        self.solve_sliding_parking_lot_test_find_range_of_blocking_cars_and_side_right_01()
+        self.solve_sliding_parking_lot_test_find_range_of_blocking_cars_and_side_right_02()
+        self.solve_sliding_parking_lot_test_get_multiple_cars_need_to_move_one_car_two_moves()
+        self.solve_sliding_parking_lot_test_get_multiple_cars_need_to_move_two_cars_both_two_moves()
+        self.solve_sliding_parking_lot_test_get_multiple_cars_need_move_one_car_two_moves()
 
 
     def check_if_equal(self, test_result, result, test_num) -> None:
@@ -120,6 +140,140 @@ class TestSolveSlidingParkingLot():
         self.check_if_equal(test_result=test_obj.result, result=['A:', 'B:', 'C:', 'D:', 'E:', 'F:', 'G:', 'H:', 'I:', 'J:', 'K:', 'L:', 'M:', 'N:', 'O:', 'P:', 'Q:', 'R:', 'S:', 'T:', 'U:', 'V:', 'P:', 'X:', 'Y:', 'Z: Ü 2 left'], test_num=10)
 
 
+    def solve_sliding_parking_lot_test_assign_moves_to_cars_one_car_gets_blocked_04(self) -> None:
+        test_obj = SolveSlidingParkingLot(CARS_IN_PARKSLOTS=["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "P", "X", "Y", "Z", "AA", "AB", "AC", "AD", "AE", "AF", "AG", "AH", "AI", "AJ", "AK", "AL", "AM", "AN", "AO", "AP", "AQ", "AR", "AS", "AT", "AU", "AV", "AP", "AX", "AY", "AZ"], BLOCKING_CARS={"BA": [51, 52]})
+        test_obj.assign_moves_to_cars()
+        self.check_if_equal(test_result=test_obj.result, result=['A:', 'B:', 'C:', 'D:', 'E:', 'F:', 'G:', 'H:', 'I:', 'J:', 'K:', 'L:', 'M:', 'N:', 'O:', 'P:', 'Q:', 'R:', 'S:', 'T:', 'U:', 'V:', 'P:', 'X:', 'Y:', 'Z:', 'AA:', 'AB:', 'AC:', 'AD:', 'AE:', 'AF:', 'AG:', 'AH:', 'AI:', 'AJ:', 'AK:', 'AL:', 'AM:', 'AN:', 'AO:', 'AP:', 'AQ:', 'AR:', 'AS:', 'AT:', 'AU:', 'AV:', 'AP:', 'AX:', 'AY:', 'AZ: BA 2 left'], test_num=11)
+
+
+    def solve_sliding_parking_lot_test_check_if_car_needs_one_or_multiple_moves_single_right_move_01(self) -> None:
+        test_obj = SolveSlidingParkingLot(CARS_IN_PARKSLOTS=["A", "B", "C", "D", "E"], BLOCKING_CARS={"F": [0, 1]})
+        test_result = test_obj.check_if_car_needs_one_or_multiple_moves()
+        self.check_if_equal(test_result=test_result, result="right", test_num=12)
+    
+
+    def solve_sliding_parking_lot_test_check_if_car_needs_one_or_multiple_moves_single_right_move_02(self) -> None:
+        test_obj = SolveSlidingParkingLot(CARS_IN_PARKSLOTS=["A", "B", "C", "D", "E"], BLOCKING_CARS={"F": [1, 2]})
+        test_obj.car_position = 1
+        test_result = test_obj.check_if_car_needs_one_or_multiple_moves()
+        self.check_if_equal(test_result=test_result, result="right", test_num=13)
+
+    
+    def solve_sliding_parking_lot_test_check_if_car_needs_one_or_multiple_moves_single_right_move_03(self) -> None:
+        test_obj = SolveSlidingParkingLot(CARS_IN_PARKSLOTS=["A", "B", "C", "D", "E"], BLOCKING_CARS={"F": [2, 3]})
+        test_obj.car_position = 2
+        test_result = test_obj.check_if_car_needs_one_or_multiple_moves()
+        self.check_if_equal(test_result=test_result, result="right", test_num=14)
+
+    
+    def solve_sliding_parking_lot_test_check_if_car_needs_one_or_multiple_moves_single_left_move_01(self) -> None:
+        test_obj = SolveSlidingParkingLot(CARS_IN_PARKSLOTS=["A", "B", "C", "D", "E"], BLOCKING_CARS={"F": [3, 4]})
+        test_obj.car_position = 4
+        test_result = test_obj.check_if_car_needs_one_or_multiple_moves()
+        self.check_if_equal(test_result=test_result, result="left", test_num=15)
+    
+
+    def solve_sliding_parking_lot_test_check_if_car_needs_one_or_multiple_moves_single_left_move_02(self) -> None:
+        test_obj = SolveSlidingParkingLot(CARS_IN_PARKSLOTS=["A", "B", "C", "D", "E"], BLOCKING_CARS={"F": [2, 3]})
+        test_obj.car_position = 3
+        test_result = test_obj.check_if_car_needs_one_or_multiple_moves()
+        self.check_if_equal(test_result=test_result, result="left", test_num=16)
+
+    
+    def solve_sliding_parking_lot_test_check_if_car_needs_one_or_multiple_moves_single_left_move_03(self) -> None:
+        test_obj = SolveSlidingParkingLot(CARS_IN_PARKSLOTS=["A", "B", "C", "D", "E"], BLOCKING_CARS={"F": [1, 2]})
+        test_obj.car_position = 2
+        test_result = test_obj.check_if_car_needs_one_or_multiple_moves()
+        self.check_if_equal(test_result=test_result, result="left", test_num=17)
+
+    
+    def solve_sliding_parking_lot_test_check_if_car_needs_one_or_multiple_moves_one_multiple_move_01(self) -> None:
+        test_obj = SolveSlidingParkingLot(CARS_IN_PARKSLOTS=["A", "B", "C", "D", "E"], BLOCKING_CARS={"F": [0, 1], "G": [2, 3]})
+        test_result = test_obj.check_if_car_needs_one_or_multiple_moves()
+        self.check_if_equal(test_result=test_result, result="multiple", test_num=18)
+    
+
+    def solve_sliding_parking_lot_test_check_if_car_needs_one_or_multiple_moves_one_multiple_move_02(self) -> None:
+        test_obj = SolveSlidingParkingLot(CARS_IN_PARKSLOTS=["A", "B", "C", "D", "E"], BLOCKING_CARS={"F": [1, 2], "G": [3, 4]})
+        test_obj.car_position = 3
+        test_result = test_obj.check_if_car_needs_one_or_multiple_moves()
+        self.check_if_equal(test_result=test_result, result="multiple", test_num=19)
+
+
+    def solve_sliding_parking_lot_test_check_if_car_needs_one_or_multiple_moves_one_multiple_move_03(self) -> None:
+        test_obj = SolveSlidingParkingLot(CARS_IN_PARKSLOTS=["A", "B", "C", "D", "E"], BLOCKING_CARS={"F": [1, 2], "G": [3, 4]})
+        test_obj.car_position = 4
+        test_result = test_obj.check_if_car_needs_one_or_multiple_moves()
+        self.check_if_equal(test_result=test_result, result="multiple", test_num=20)
+
+
+    def solve_sliding_parking_lot_test_one_move_get_blocking_car_blocking_car(self) -> None:
+        test_obj = SolveSlidingParkingLot(CARS_IN_PARKSLOTS=["A", "B", "C", "D", "E"], BLOCKING_CARS={"F": [0, 1]})
+        test_result = test_obj.one_move_get_blocking_car()
+        self.check_if_equal(test_result=test_result, result="F", test_num=21)
+
+
+    def solve_sliding_parking_lot_test_get_moves_needed_per_side_1_left_2_right(self) -> None:
+        test_obj = SolveSlidingParkingLot(CARS_IN_PARKSLOTS=["A", "B", "C", "D", "E", "F", "G", "H"], BLOCKING_CARS={"I": [1, 2], "J": [3, 4], "K": [5, 6]})
+        test_obj.car_position = 2
+        test_result = test_obj.get_moves_needed_per_side()
+        self.check_if_equal(test_result=test_result, result=[[1, 2], [1, 2]], test_num=22)
+
+
+    def solve_sliding_parking_lot_test_get_moves_needed_per_side_2_left_1_right(self) -> None:
+        test_obj = SolveSlidingParkingLot(["A", "B", "C", "D", "E", "F", "G", "H"], BLOCKING_CARS={"I": [1, 2], "J": [3, 4], "K": [5, 6]})
+        test_obj.car_position = 1
+        test_result = test_obj.get_moves_needed_per_side()
+        self.check_if_equal(test_result=test_result, result=[[2, 1], [2, 1]], test_num=23)
+
+
+    def solve_sliding_parking_lot_test_find_range_of_blocking_cars_and_side_left_01(self) -> None:
+        test_obj = SolveSlidingParkingLot(CARS_IN_PARKSLOTS=["A", "B", "C", "D", "E", "F", "G", "H"], BLOCKING_CARS={"I": [1, 2], "J": [3, 4], "K": [5, 6]})
+        test_obj.car_position = 2
+        test_result = test_obj.find_range_of_blocking_cars_and_side(moves_needed_per_side=[1, 2], backup_moves_needed_per_side=[1,2])
+        self.check_if_equal(test_result=test_result, result=[-1, 'left', 1], test_num=24)
+
+    
+    def solve_sliding_parking_lot_test_find_range_of_blocking_cars_and_side_left_02(self) -> None:
+        test_obj = SolveSlidingParkingLot(CARS_IN_PARKSLOTS=["A", "B", "C", "D", "E", "F", "G", "H"], BLOCKING_CARS={"I": [3, 4], "J": [5, 6]})
+        test_obj.car_position = 5
+        test_result = test_obj.find_range_of_blocking_cars_and_side(moves_needed_per_side=[1, 2], backup_moves_needed_per_side=[1, 2])
+        self.check_if_equal(test_result=test_result, result=[1, 'left', 1], test_num=25)
+
+
+    def solve_sliding_parking_lot_test_find_range_of_blocking_cars_and_side_right_01(self) -> None:
+        test_obj = SolveSlidingParkingLot(CARS_IN_PARKSLOTS=["A", "B", "C", "D", "E", "F", "G", "H"], BLOCKING_CARS={"I": [3, 4], "J": [5, 6]})
+        test_obj.car_position = 5
+        test_result = test_obj.find_range_of_blocking_cars_and_side(moves_needed_per_side=[2, 1], backup_moves_needed_per_side=[2,1])
+        self.check_if_equal(test_result=test_result, result=[8, 'right', 1], test_num=26)
+
+
+    def solve_sliding_parking_lot_test_find_range_of_blocking_cars_and_side_right_02(self) -> None:
+        test_obj = SolveSlidingParkingLot(CARS_IN_PARKSLOTS=["A", "B", "C", "D", "E", "F", "G", "H"], BLOCKING_CARS={"I": [0, 1], "J": [2, 3], "K": [4, 5]})
+        test_obj.car_position = 4
+        test_result = test_obj.find_range_of_blocking_cars_and_side(moves_needed_per_side=[1, 2], backup_moves_needed_per_side=[1, 2])
+        self.check_if_equal(test_result=test_result, result=[8, 'right', 2], test_num=27)
+
+
+    def solve_sliding_parking_lot_test_get_multiple_cars_need_to_move_one_car_two_moves(self) -> None:
+        test_obj = SolveSlidingParkingLot(CARS_IN_PARKSLOTS=["A", "B", "C", "D", "E", "F"], BLOCKING_CARS={"G": [4, 5]})
+        test_obj.car_position = 5
+        test_result = test_obj.get_multiple_cars_need_to_move([3, "left", 1])
+        self.check_if_equal(test_result=test_result, result="G 1 left", test_num=28)
+
+
+    def solve_sliding_parking_lot_test_get_multiple_cars_need_to_move_two_cars_both_two_moves(self) -> None:
+        test_obj = SolveSlidingParkingLot(CARS_IN_PARKSLOTS=["A", "B", "C", "D", "E", "F"], BLOCKING_CARS={"G": [4, 5], "H": [2, 3]})
+        test_obj.car_position = 4
+        test_result = test_obj.get_multiple_cars_need_to_move([1, "left", 2])
+        self.check_if_equal(test_result=test_result, result= "H 2 left, G 2 left", test_num=29)
+
+
+    def solve_sliding_parking_lot_test_get_multiple_cars_need_move_one_car_two_moves(self) -> None: 
+        test_obj = SolveSlidingParkingLot(CARS_IN_PARKSLOTS=["A", "B", "C", "D", "E", "F"], BLOCKING_CARS={"G": [0, 1], "H": [2, 3]})
+        test_obj.car_position = 2
+        test_result = test_obj.get_multiple_cars_need_to_move([2, "right", 2])
+        self.check_if_equal(test_result=test_result, result="H 2 right", test_num=30)
 
     def get_test_result(self) -> float:
         return self.passed_tests / self.test_counter
