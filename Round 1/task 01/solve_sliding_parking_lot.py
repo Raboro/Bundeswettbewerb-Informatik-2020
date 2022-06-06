@@ -32,7 +32,7 @@ class SolveSlidingParkingLot():
             move_status = self.check_if_car_needs_one_or_multiple_moves()
                 
             if move_status == "multiple":
-                blocking_cars = self.mutliple_moves()
+                blocking_cars = self.multiple_moves()
                 self.result.append(f"{car}: {blocking_cars}")
                 continue
 
@@ -64,7 +64,7 @@ class SolveSlidingParkingLot():
         return [car for car, currend_blocking_car_position in self.BLOCKING_CARS.items() if self.car_position in currend_blocking_car_position][0]      
 
     
-    def mutliple_moves(self) -> str:
+    def multiple_moves(self) -> str:
         """
         return multiple moves and the cars, which needs to be moved
         """
