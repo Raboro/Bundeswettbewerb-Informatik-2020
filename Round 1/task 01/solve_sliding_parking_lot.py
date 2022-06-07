@@ -61,7 +61,7 @@ class SolveSlidingParkingLot():
         return for one move the blocking car, which needs to be moved 
         """
 
-        return [car for car, currend_blocking_car_position in self.BLOCKING_CARS.items() if self.car_position in currend_blocking_car_position][0]      
+        return [car for car, current_blocking_car_position in self.BLOCKING_CARS.items() if self.car_position in current_blocking_car_position][0]      
 
     
     def multiple_moves(self) -> str:

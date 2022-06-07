@@ -6,7 +6,7 @@ from solve_sliding_parking_lot import SolveSlidingParkingLot
 
 __author__ = "Marius Wörfel"
 __email__ = "raborogit@gmail.com"
-__status__ = "Documentation 06/06/2022"
+__status__ = "Finished 06/07/2022"
 
 
 def main() -> None:
